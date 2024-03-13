@@ -62,7 +62,9 @@ struct SourcesScreen: View {
                 }
             }.onAppear{
                 self.viewModel.startObserving()
-            }
+            }.onDisappear(perform: {
+                self.viewModel.viewModel.clear()
+            })
             .navigationTitle("Sources")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
