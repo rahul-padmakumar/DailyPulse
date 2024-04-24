@@ -1,4 +1,4 @@
-package com.petros.efthymiou.dailypulse.android.screens
+package com.petros.efthymiou.dailypulse.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,22 +24,33 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.petros.efthymiou.dailypulse.sources.application.Source
 import com.petros.efthymiou.dailypulse.sources.presentation.SourcesViewModel
-import org.koin.androidx.compose.getViewModel
+import com.petros.efthymiou.dailypulse.ui.screens.elements.ErrorMessage
+import org.koin.compose.koinInject
+
+class SourcesScreen: Screen {
+
+    @Composable
+    override fun Content() {
+        SourcesScreenContent()
+    }
+}
 
 @Composable
-fun SourcesScreen(
-    viewModel: SourcesViewModel = getViewModel(),
-    onUpButtonClick: () -> Unit
-) {
-    val articlesState = viewModel.sourcesState.collectAsState()
+fun SourcesScreenContent(
+    viewModel: SourcesViewModel = koinInject()) {
+    val sourcesState = viewModel.sourcesState.collectAsState()
 
     Column {
-        AppBar(onUpButtonClick)
+        AppBar()
 
-        if (articlesState.value.error != null)
-            ErrorMessage(articlesState.value.error!!)
+        if (sourcesState.value.error != null)
+            ErrorMessage(sourcesState.value.error!!)
 
         SourcesListView(viewModel)
     }
@@ -47,13 +58,15 @@ fun SourcesScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AppBar(
-    onUpButtonClick: () -> Unit,
-) {
+private fun AppBar() {
+    val navigator = LocalNavigator.currentOrThrow
+
     TopAppBar(
         title = { Text(text = "Sources") },
         navigationIcon = {
-            IconButton(onClick = onUpButtonClick) {
+            IconButton(onClick = {
+                navigator.pop()
+            }) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Up Button",
@@ -98,6 +111,9 @@ fun SourceItemView(source: Source) {
         Spacer(modifier = Modifier.height(4.dp))
     }
 }
+
+
+
 
 
 

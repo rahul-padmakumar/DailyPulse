@@ -1,31 +1,30 @@
 [versions]
 agp = "8.2.0-beta05"
 coilCompose = "2.5.0"
-kotlin = "1.9.10"
+kotlin = "1.9.22"
 compose = "1.5.1"
 accompanistSwiperefresh = "0.24.13-rc"
 compose-compiler = "1.5.3"
-compose-material3 = "1.1.2"
+compose-material3 = "1.2.1"
 androidx-activityCompose = "1.7.2"
 kotlinxCoroutinesCore = "1.7.3"
 lifecycleViewmodelKtx = "2.6.2"
 navigationCompose = "2.7.5"
 ktorClient = "2.3.5"
 kotlinxDatetime = "0.4.1"
-koin = "3.4.3"
-sqlDelight = "2.0.0"
+koin = "3.6.0-wasm-alpha2"
+sqlDelight = "2.0.1"
+composeMultiplatform = "1.6.1"
+koinCompose = "1.1.2"
+kamelImage = "0.9.4"
+voyagerVersion = "1.1.0-alpha04"
+
 
 [libraries]
-accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 
@@ -37,13 +36,21 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClient" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorClient" }
 
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
+
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerVersion" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerVersion" }
 
 sql-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sql-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sql-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+
+compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "composeMultiplatform" }
+
+kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
+
 
 
 [plugins]
@@ -51,6 +58,8 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+
+composeMultiplatformPlugin = { id= "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+
 
