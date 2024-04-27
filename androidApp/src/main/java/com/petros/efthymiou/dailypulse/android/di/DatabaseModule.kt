@@ -8,7 +8,7 @@ import petros.efthymiou.dailypulse.db.DailyPulseDatabase
 
 val databaseModule = module {
 
-    single<SqlDriver> { DatabaseDriverFactory(androidContext()).createDriver() }
+    single<SqlDriver> { DatabaseDriverFactory(androidContext()).createDriver()!! }
 
     single<DailyPulseDatabase> { DailyPulseDatabase(get()) }
 }

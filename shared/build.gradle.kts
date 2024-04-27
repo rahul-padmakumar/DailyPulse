@@ -30,6 +30,11 @@ kotlin {
 
     jvm("desktop")
 
+    js(IR) {
+        binaries.executable()
+        browser()
+    }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -75,6 +80,12 @@ kotlin {
             }
         }
 
+        val jsMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.js)
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
@@ -97,4 +108,8 @@ sqldelight {
             packageName.set("petros.efthymiou.dailypulse.db")
         }
     }
+}
+
+compose.experimental {
+    web.application {}
 }

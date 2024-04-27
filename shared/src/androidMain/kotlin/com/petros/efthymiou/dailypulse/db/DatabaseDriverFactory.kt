@@ -7,7 +7,7 @@ import petros.efthymiou.dailypulse.db.DailyPulseDatabase
 
 actual class DatabaseDriverFactory(private val context: Context) {
 
-    actual fun createDriver(): SqlDriver =
+    actual fun createDriver(): SqlDriver? =
         AndroidSqliteDriver(
             schema = DailyPulseDatabase.Schema,
             context = context,
