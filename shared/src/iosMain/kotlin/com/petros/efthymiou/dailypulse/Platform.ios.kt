@@ -1,6 +1,7 @@
 package com.petros.efthymiou.dailypulse
 
 import platform.UIKit.UIDevice
+import platform.UIKit.UIScreen
 
 actual class Platform {
     actual val osName: String
