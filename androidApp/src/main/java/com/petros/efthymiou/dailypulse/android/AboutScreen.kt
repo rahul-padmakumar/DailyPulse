@@ -4,7 +4,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -17,12 +21,15 @@ import androidx.compose.ui.unit.dp
 import com.petros.efthymiou.dailypulse.Platform
 
 @Composable
-fun AboutScreen(){
+fun AboutScreen(onNavigateUp: () -> Unit){
     Surface(
         color = Color.White
     ){
         Column {
-            Toolbar(title = "About Screen")
+            Toolbar(
+                title = "About Screen",
+                onNavigateUp
+            )
             Content()
         }
     }
@@ -30,8 +37,15 @@ fun AboutScreen(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Toolbar(title: String){
-    TopAppBar(title = { Text(title)})
+fun Toolbar(title: String, onNavigateUp: () -> Unit){
+    TopAppBar(
+        title = { Text(title)},
+        navigationIcon = {
+            IconButton(onClick = onNavigateUp) {
+                Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack, contentDescription = "")
+            }
+        }
+    )
 }
 
 @Composable

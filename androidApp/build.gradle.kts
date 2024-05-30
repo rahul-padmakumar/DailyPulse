@@ -48,4 +48,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.coil)
     debugImplementation(libs.compose.ui.tooling)
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 }
