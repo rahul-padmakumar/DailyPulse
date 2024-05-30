@@ -1,6 +1,5 @@
 package com.petros.efthymiou.dailypulse.android
 
-import android.widget.ImageButton
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,8 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -104,11 +101,12 @@ fun ArticleItemUI(article: Article) {
             article.title ?: "",
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
-                fontSize = 22.sp
+                fontSize = 22.sp,
+                color = Color.Black
             )
         )
         Spacer(modifier = Modifier.height(4.dp))
-        Text(article.subTitle ?: "")
+        Text(article.subTitle ?: "", style = TextStyle(color = Color.Black))
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = article.date ?: "",

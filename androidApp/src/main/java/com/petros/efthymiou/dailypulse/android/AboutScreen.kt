@@ -39,7 +39,7 @@ fun AboutScreen(onNavigateUp: () -> Unit){
 @Composable
 fun Toolbar(title: String, onNavigateUp: () -> Unit){
     TopAppBar(
-        title = { Text(title)},
+        title = { Text(title, style = TextStyle(color = Color.Black))},
         navigationIcon = {
             IconButton(onClick = onNavigateUp) {
                 Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack, contentDescription = "")
@@ -51,8 +51,8 @@ fun Toolbar(title: String, onNavigateUp: () -> Unit){
 @Composable
 fun RowView(label: String, value: String){
     Column(modifier = Modifier.padding(8.dp)) {
-        Text(style = TextStyle(fontWeight = FontWeight.Bold), text = label)
-        Text(text = value)
+        Text(style = TextStyle(fontWeight = FontWeight.Bold, color = Color.Black), text = label)
+        Text(text = value, style = TextStyle(color = Color.Black))
     }
 }
 
