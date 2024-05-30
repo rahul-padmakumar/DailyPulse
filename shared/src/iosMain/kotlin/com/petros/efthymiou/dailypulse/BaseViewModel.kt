@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 
-actual open class BaseViewModel() {
+actual open class BaseViewModel{
     actual val scope: CoroutineScope
         get() = CoroutineScope(Job())
 
