@@ -16,7 +16,7 @@ extension ArticleScreen{
         
         @Published var articleState: ArticleState
         init() {
-            self.articleViewModel = ArticleViewModel()
+            self.articleViewModel = ArticleInjector().articleViewModel
             self.articleState = articleViewModel.state.value
         }
         
