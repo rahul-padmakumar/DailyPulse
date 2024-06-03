@@ -1,6 +1,7 @@
 package com.petros.efthymiou.dailypulse.android
 
 import android.app.Application
+import com.petros.efthymiou.dailypulse.android.di.databaseModule
 import com.petros.efthymiou.dailypulse.android.di.viewModelModule
 import com.petros.efthymiou.dailypulse.di.sharedKoinModule
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +14,7 @@ class DailyPulseApp: Application() {
     }
 
     private fun initKoin() {
-        val modules = sharedKoinModule + viewModelModule
+        val modules = sharedKoinModule + viewModelModule + databaseModule
 
         startKoin {
             androidContext(this@DailyPulseApp)

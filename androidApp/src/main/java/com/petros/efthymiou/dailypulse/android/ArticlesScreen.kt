@@ -1,5 +1,6 @@
 package com.petros.efthymiou.dailypulse.android
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,10 +18,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -54,15 +60,37 @@ fun ArticlesScreen(
         }
     }
 
-    ArticlesUI(state.value, onAboutClicked)
+    ArticlesUI(state.value, onAboutClicked){
+        articleViewModel.loadData(true)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ArticlesUI(
     value: ArticleState,
-    onAboutClicked: () -> Unit
+    onAboutClicked: () -> Unit,
+    onRefresh: () -> Unit
     ) {
+
+    val pullToRefreshState = rememberPullToRefreshState()
+    val onRefreshState = rememberUpdatedState(newValue = onRefresh)
+
+    if(pullToRefreshState.isRefreshing){
+        LaunchedEffect(key1 = true) {
+            onRefreshState.value()
+        }
+    }
+
+    LaunchedEffect(key1 = value.isRefreshing) {
+        if(value.isRefreshing){
+            pullToRefreshState.startRefresh()
+        } else {
+            pullToRefreshState.endRefresh()
+        }
+    }
+
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color.White
@@ -78,9 +106,17 @@ fun ArticlesUI(
                 }
             )
 
-            LazyColumn {
-                items(value.articles){
-                    ArticleItemUI(it)
+            Box(modifier = Modifier.fillMaxWidth().nestedScroll(pullToRefreshState.nestedScrollConnection)){
+                LazyColumn {
+                    items(value.articles){
+                        ArticleItemUI(it)
+                    }
+                }
+                if(value.isLoading.not()) {
+                    PullToRefreshContainer(
+                        state = pullToRefreshState,
+                        modifier = Modifier.align(Alignment.TopCenter)
+                    )
                 }
             }
         }

@@ -12,18 +12,18 @@ class ArticleViewModel(private val articleUseCase: ArticleUseCase): BaseViewMode
     val state: StateFlow<ArticleState> = _state
 
     init {
-        loadData()
+        loadData(false)
     }
 
-    private fun loadData(){
+    fun loadData(forceRefresh: Boolean){
+        println("Refrsh called: $forceRefresh")
         scope.launch {
             _state.update {
-                it.copy(isLoading = true)
+                it.copy(isLoading = forceRefresh.not(), isRefreshing = it.isLoading.not() && forceRefresh)
             }
-            val data = articleUseCase.getArticles()
-            delay(500)
+            val data = articleUseCase.getArticles(forceRefresh)
             _state.update {
-                it.copy(articles = data, isLoading = false)
+                it.copy(articles = data, isLoading = false, isRefreshing = false)
             }
         }
     }
