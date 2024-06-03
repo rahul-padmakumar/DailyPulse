@@ -35,6 +35,7 @@ kotlin {
                 implementation(libs.ktor.negotiation)
                 implementation(libs.ktor.json)
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.koin.core)
             }
         }
         val androidMain by getting{

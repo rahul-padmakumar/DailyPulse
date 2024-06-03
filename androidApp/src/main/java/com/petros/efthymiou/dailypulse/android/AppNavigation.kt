@@ -10,21 +10,20 @@ import androidx.navigation.compose.rememberNavController
 import com.petros.efthymiou.dailypulse.articles.ArticleViewModel
 
 @Composable
-fun AppNavigation(viewModel: ArticleViewModel){
+fun AppNavigation(){
     val navController = rememberNavController()
-    AppNavHost(viewModel = viewModel, navController = navController)
+    AppNavHost(navController = navController)
 }
 
 @Composable
 fun AppNavHost(
-    viewModel: ArticleViewModel,
     navController: NavHostController
 ){
     NavHost(navController = navController, startDestination = Screens.ARTICLES_SCREEN.route) {
         composable(
             route = Screens.ARTICLES_SCREEN.route
         ){
-            ArticlesScreen(articleViewModel = viewModel) {
+            ArticlesScreen() {
                 navController.navigate(Screens.ABOUT_SCREEN.route)
             }
         }

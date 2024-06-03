@@ -16,14 +16,13 @@ import com.petros.efthymiou.dailypulse.articles.ArticleViewModel
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewmodel: ArticleViewModel by viewModels<ArticleViewModel>()
         setContent {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   AppNavigation(viewModel = viewmodel)
+                   AppNavigation()
                 }
             }
         }
